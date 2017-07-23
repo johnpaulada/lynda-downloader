@@ -8,11 +8,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 LYNDA_URL = "https://www.lynda.com/portal/sip?org=houstonlibrary.org"
-USERNAME = "xxx"
-PASSWORD = "xxx"
+USERNAME = "xx"
+PASSWORD = "xx"
 USERNAME_FIELD_ID = "card-number"
 PASSWORD_FIELD_ID = "card-pin"
-LINKS_URL = "./links.txt"
+LINKS_URL = "../links.txt"
 COURSES_DIR = 'courses'
 
 driver = webdriver.Chrome()
