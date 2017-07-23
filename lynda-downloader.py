@@ -13,6 +13,7 @@ PASSWORD = "xxx"
 USERNAME_FIELD_ID = "card-number"
 PASSWORD_FIELD_ID = "card-pin"
 LINKS_URL = "./links.txt"
+COURSES_DIR = 'courses'
 
 driver = webdriver.Chrome()
 driver.wait = WebDriverWait(driver, 10)
@@ -30,6 +31,10 @@ def enter_credentials(username, password, username_field_id, password_field_id):
     password_field.submit()
 
 def download_courses(links_url):
+    if not os.path.exists(COURSES_DIR):
+        os.mkdir(COURSES_DIR)
+    os.chdir(COURSES_DIR)
+
     for link in open(links_url):
         if link != '':
             download_course(link)
