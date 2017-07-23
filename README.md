@@ -1,7 +1,7 @@
 # Lynda Downloader
 Download videos from `lynda.com` with Python.
 
-**Note: This might be unstable. I built this for my own use but decided to open source it.**
+**Note: This might be unstable. I built this for my own use but decided to open source it. Hope it works for you :sweat_smile:**
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-python.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
