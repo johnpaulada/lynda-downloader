@@ -47,9 +47,10 @@ def download_course(link):
 
     print("Downloading {title}...".format(title = course_title))
 
-    if not os.path.exists(course_title):
-        os.mkdir(course_title)
-    os.chdir(course_title)
+    sanitized_course_title = sanitize_filename(course_title)
+    if not os.path.exists(sanitized_course_title):
+        os.mkdir(sanitized_course_title)
+    os.chdir(sanitized_course_title)
 
     chapter_lis = driver.find_elements_by_css_selector('.course-toc > li')
     chapters = get_chapters(chapter_lis)
@@ -95,9 +96,10 @@ def download_chapter(chapter):
 
     print("  Downloading {chapter}...".format(chapter = chapter_title))
 
-    if not os.path.exists(chapter_title):
-        os.mkdir(chapter_title)
-    os.chdir(chapter_title)
+    sanitized_chapter_title = sanitize_filename(chapter_title)
+    if not os.path.exists(sanitized_chapter_title):
+        os.mkdir(sanitized_chapter_title)
+    os.chdir(sanitized_chapter_title)
 
     for video in video_list:
         download_video(video)
@@ -112,9 +114,10 @@ def download_video(video):
 
     video_title = video[VIDEO_TITLE_INDEX]
     video_filename = video_title + '.mp4'
+    sanitized_filename = sanitize_filename(video_filename)
     video_page = video[VIDEO_PAGE_INDEX]
 
-    if not os.path.exists(video_filename):
+    if not os.path.exists(sanitized_filename):
         print("    Downloading {title}...".format(title = video_title))
         video_url = get_video(video_page)
         save_video(video_title, video_url)
@@ -143,8 +146,19 @@ def save_video(video_title, video_url):
     video_file = urllib2.urlopen(video_url)
     video_data = video_file.read()
     video_filename = video_title + ".mp4"
-    with open(video_filename, "wb") as file_writer:
+    sanitized_filename = sanitize_filename(video_filename)
+
+    with open(sanitized_filename, "wb") as file_writer:
         file_writer.write(video_data)
+
+def sanitize_filename(filename):
+    no_slash = remove_slash(filename)
+    sanitized_filename = no_slash
+
+    return sanitized_filename
+
+def remove_slash(s):
+    return re.sub(r'\/', '-', s)
 
 open_page(LYNDA_URL)
 enter_credentials(USERNAME, PASSWORD, USERNAME_FIELD_ID, PASSWORD_FIELD_ID)
