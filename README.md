@@ -17,8 +17,9 @@ Download videos from `lynda.com` with Python.
 ## Instructions
 1. Clone this repository with `git clone https://github.com/johnpaulada/lynda-downloader.git`.
 2. Move inside the project: `cd lynda-downloader`.
-3. Run `lynda-downloader.py`: `python lynda-downloader.py`.
-4. When the browser opens, expand it to full screen.
+3. Add your `USERNAME`, `PASSWORD`, the `USERNAME_FIELD_ID`, and the `PASSWORD_FIELD_ID`. 
+4. Run `lynda-downloader.py`: `python lynda-downloader.py`.
+5. When the browser opens, expand it to full screen.
 
 ## Troubleshooting
 If you encounter problems, please create an issue. Thanks! :smile:
