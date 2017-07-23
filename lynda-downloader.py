@@ -50,6 +50,8 @@ def download_course(link):
     chapters = get_chapters(chapter_lis)
     download_chapters(chapters)
 
+    os.chdir('..')
+
     print("{title} complete.".format(title = course_title))
 
 def get_chapters(chapter_lis):
