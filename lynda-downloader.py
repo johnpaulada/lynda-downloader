@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import time
 import re
 import os
@@ -113,17 +115,18 @@ def download_video(video):
     VIDEO_PAGE_INDEX = 1
 
     video_title = video[VIDEO_TITLE_INDEX]
+    sanitized_title = sanitize_filename(video_title)
     video_filename = video_title + '.mp4'
     sanitized_filename = sanitize_filename(video_filename)
     video_page = video[VIDEO_PAGE_INDEX]
 
     if not os.path.exists(sanitized_filename):
-        print("    Downloading {title}...".format(title = video_title))
+        print("    Downloading {title}...".format(title = sanitized_title))
         video_url = get_video(video_page)
         save_video(video_title, video_url)
-        print("    {title} complete.".format(title = video_title))
+        print("    {title} complete.".format(title = sanitized_title))
     else:
-        print("    {title} exists.".format(title = video_title))
+        print("    {title} exists.".format(title = sanitized_title))
 
 def get_video(video_page):
     driver.get(video_page)
@@ -152,13 +155,21 @@ def save_video(video_title, video_url):
         file_writer.write(video_data)
 
 def sanitize_filename(filename):
-    no_slash = remove_slash(filename)
-    sanitized_filename = no_slash
+    as_utf8 = to_utf8(filename)
+    no_slash = remove_slash(as_utf8)
+    no_ndash = remove_ndash(no_slash)
+    sanitized_filename = no_ndash
 
     return sanitized_filename
 
+def to_utf8(s):
+    return s.encode('utf8')
+
 def remove_slash(s):
     return re.sub(r'\/', '-', s)
+
+def remove_ndash(s):
+    return re.sub(r'–', '-', s)
 
 open_page(LYNDA_URL)
 enter_credentials(USERNAME, PASSWORD, USERNAME_FIELD_ID, PASSWORD_FIELD_ID)
